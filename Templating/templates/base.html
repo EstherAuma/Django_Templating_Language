@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}<title>{{ title|default:'DTL' }}</title>{% endblock %}
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+</head>
+
+<body style="background-color:beige ;">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: beige;">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">BRMSPC</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                {% if user.is_authenticated %}
+                <div class="navbar-nav">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link" href="#">Features</a>
+                    <a class="nav-link" href="#">Pricing</a>
+                    <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                </div>
+                {% endif %}
+                <div class="nav-item">
+                <a class="nav-link" href="#">Login</a>
+                </div>
+                <div class="nav-item">
+                    <a class="nav-link" href="#">Register</a>
+                    </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="card">
+        {% if user.is_authenticated %}
+        <div class="card-body">
+            <h1>Welcome to {{ title|default:'Authenticated DTL user' }}</h1>
+            <h2>Compiled by {{author|default:'Esther' }}</h2>
+
+        </div>
+        {% else %}
+
+        <div class="card-body">
+            <h1>{{ title|default:'Un authenticated DTL user' }}</h1>
+            <h2>{{author|default:'Please login' }}</h2>
+
+        </div>
+        {% endif %}
+    </div>
+    <br>
+    <div class="card">
+       
+        <div class="card-body">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+
+
+    <footer style="background-color:#212529;text-align: center;left: 0;bottom: 0;height: 67px;max-width: 100%;padding-top: 10px;color: white; margin-top: 140px;">
+        &copy; Django Templating Language
+    </footer>
+</body>
+
+</html>

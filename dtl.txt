@@ -1,0 +1,93 @@
+DJANGO TEMPLATING LANGUAGE
+-Django templating language is not simply python embaded in html but it is a templating system
+ designed to express presenation not program logic.
+-It's designed for presenting work.
+-The django templating system provides tags which function similarly to some other  programming constracts 
+e.g, if tag for boolean tests and for loop for looping.
+
+TERMS
+*Template; It is just a textfile.
+
+*Tags; these are used for presentation flow in django
+-These are not executed as the corresponding python code however are evaluated when the template
+is loaded.
+-Tags are written with moduli eg tag1 {% tag1 %}
+
+*VARIABLES; it's written with two curly braces eg {{variable1}}
+-A variable in dtl is not stored in the template however it's the templating engine 
+that evaluates the variable and replaces it with the results.
+Vriable names should;
+- not include spaces,
+- should not begin with a number or  underscore or a dot/full stop
+-Whenaccessing a variable, the exact dictionary key used in the view
+is what should be called.
+-Whatever you put within the curly braces is read as a variable name.
+-You can not calculate within the template 
+however we can calculate within the view and send the value to the template
+
+TAGS {% tag1 %}
+-Tags are written with moduli eg tag1 {% tag1 %}
+-Tags are more complex than variables, 
+some create text in the output,some control presentation flow by performing loops or logic eg {% for %} and {% if %}
+and some load external information from  views or other templates to be used by later variables eg {% extends %}
+-Some tags require a beginning and ending tag,i.e, {% tag %} ...content... {%endtag%}eg {% block content %} ...content... {%endblock%} whereas others don't, eg {% extends 'parent_template.html' %}
+-There should always be space between the modulus signs and the tag name.
+-The tag name should never be in capital letters, a number or a symbol , they should always be in small letters.
+
+*Different types of tags used in django templating.
+1.Extend, ie, {% extends 'parent_template.html' %}
+    -This tag is used to inherit a base layout.
+    -This does not require an opening and closing tag
+
+2.Load, ie, {% load static %}
+    -This is used to load external information or files from the django static folder 
+    eg, css, images, audio, video, javascript.
+    -This does not require  closing tag.
+
+3. For tag, ie ,{% for item in items %} ..action..{% endfor %}
+    -This one requires an opening and closing tag.
+    -This is used to loop over every item in a list of items.
+
+
+4.If,elif and else tags.
+    -This evaaluates a variable or condition, if the cndition is satisfied,
+    or the variable is true, then the block of code is displayed.
+    -The if tag can be used in conjunction is_authenticated() method, to control
+    what the user sees before and after logging in(authentication)
+
+FILTERS.
+    -They are used to modify variables for display.
+    -We write them within the curly braces within the variabl using a pipe.
+-Examples of filters;
+-They include;
+    1.Lower - letters in lower case
+    e.g, {{ num1|lower }}
+    2.Upper -make letters capital e.g, {{ num1|upper }}
+    3.Length - it is used to return the length of the variable contents and it works for lists and strings.
+    e.g, {{num1|lenght }}
+    4. Filesizeformat
+    e.g,{{ num1|filesizeformat }}
+    5.Tite
+    6.Default; if the variable is empty, the default is used
+    e.g, {{ num3|default:'Esther'}}
+    7.capfirst; It formats the value of the variable filesize into human readable filesize
+    e.g, {{ num4|capfirst }}
+    8.Linebreak; convers linebreaks into paragraph tags
+    e.g, {{ num1|linebreak}}
+    9.Escape; it's used to escape text contents,
+     It turns a break tag into a p tag.
+     It turns line breaks into p tags in an html file.
+    10.Truncatewords; this will display the first number of words that you set for a particular variable.
+    e.g, {{ words|truncatewords:put the number of words to truncate }}
+    *11.Join; it filters the arguments that contain spaces and must be quoted.
+    To joi a list with commas and spaces, you will use join filters e.g,
+    {{ students|join:',' }}
+-Filters can be changed or nested, the output of one filter can be passed onto the next.
+e.g, {{ text|linebreaks }}
+    -filters can be combined/joined, the output of one filters can be passed on to the next
+    e.g, {{ text|linebreaks|escape|upper|default:'Esther'}}
+
+
+COMMENTS
+-Comments are used to commentout lines of codes in dtl.
+-it's written using  curly braces with nested hash#, e.g;{# your comment #}

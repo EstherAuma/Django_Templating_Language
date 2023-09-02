@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<h4>Collecting user data</h4>
+<div class='card'>
+    <div class='card-body'>
+        <form class='form-control' method='POST' enctype='multipart/form-data' action='/data_collection'>
+            {% csrf_token %}
+            <input type='text' name='username' placeholder='Please enter your name' required>
+            <br>
+            <input type='number' name='age' placeholder='Please enter your age' required>
+            <br>
+            <input type='text' name='phone' placeholder='Please enter your phone number' required>
+            <br>
+            <input type='submit' class='btn btn-lg btn-outline-success' value='COLLECT'>
+        </form>
+    </div>
+</div>
+{% endblock %}
